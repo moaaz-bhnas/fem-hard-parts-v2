@@ -25,6 +25,7 @@ var returnNextElement = createFlow([1, 2, 3]);
  * of data, not from a collection
  * but from "intermediate returns"
  * Generators allow us to dynamically set what data flows to us
+ * https://www.canva.com/design/DAGEkoKNjmc/QYq0Mvz_nWF6A_3cVcF19Q/edit?utm_content=DAGEkoKNjmc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
  */
 function* createFlow() {
   const num = 10;
