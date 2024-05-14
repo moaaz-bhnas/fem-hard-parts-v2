@@ -36,4 +36,41 @@ function* createFlow() {
 
 var returnNextElement = createFlow();
 const element1 = returnNextElement.next();
-const element2 = returnNextElement.next();
+const element2 = returnNextElement.next(2);
+
+/**
+ * Notice in the previous example, you're not just iterating
+ * you're determining what element to return next by passing an argument
+ * Also you're suspending the execution context of a function and resume it with next
+ * Can't we utilize this model for asyncronous code
+ * pause an async function execution context, then resume it with the fetched data (as argument)
+ */
+function resume(data) {
+  generatorObject.next(data);
+}
+
+function* createFlow2() {
+  const data = yield Promise.resolve(4);
+  console.log(data);
+}
+
+const generatorObject = createFlow2();
+const futureData = generatorObject.next();
+futureData.value.then(resume);
+
+/**
+ * Async/await simplifies this design for us
+ * JavaScript will auto trigger the resumption of createFlow2
+ * execution context once the data is fetched
+ * passing the reponse object back in as the evaluated result of the yield expression
+ */
+
+async function createFlow3() {
+  console.log("1️⃣");
+  const data = await Promise.resolve(5);
+  console.log(data);
+}
+
+createFlow3();
+
+console.log("2️⃣");
